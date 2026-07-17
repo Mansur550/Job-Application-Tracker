@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight} from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link";
+import Image from "next/image";
 
 
 
@@ -21,15 +22,38 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col items-center gap-4">
-              <Link href = "/sign-up">
-              <Button size="lg" className="h-12 px-8 text-lg font-medium" >
-                Start for free
-                <ArrowRight className="ml-2"/>
+              <Link href="/sign-up">
+                <Button size="lg" className="h-12 px-8 text-lg font-medium" >
+                  Start for free
+                  <ArrowRight className="ml-2" />
                 </Button>
-                </Link>
+              </Link>
               <p className="text-sm text-muted-foreground">Free forever. No payment is required.</p>
             </div>
           </div>
+        </section>
+
+        {/* Hero Images Section */}
+        <section className="border-t  bg-white py-16">
+          <div>
+            <div>
+              {/* Tabs */}
+              <div>
+                <Button>Organize Application</Button>
+                <Button>Get Hired</Button>
+                <Button>Manage Boards</Button>
+              </div>
+              <div>
+                <Image
+                  src="/hero-images/hero1.png"
+                  alt="Organize Applications"
+                  width={1200}
+                  height={800}
+                />
+              </div>
+            </div>
+          </div>
+
         </section>
       </main>
     </div>
