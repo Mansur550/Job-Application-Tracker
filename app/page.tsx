@@ -50,6 +50,20 @@ export default function Home() {
                   width={1200}
                   height={800}
                 />
+
+                <Image
+                  src="/hero-images/hero2.png"
+                  alt="Get Heried"
+                  width={1200}
+                  height={800}
+                />
+
+                <Image
+                  src="/hero-images/hero1.png"
+                  alt="Organize Applications"
+                  width={1200}
+                  height={800}
+                />
               </div>
             </div>
           </div>
