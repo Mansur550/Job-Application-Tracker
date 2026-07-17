@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 
 
 
 export default function Home() {
 
-  
+  const [activeTab, setActiveTab] = useState("organize");
 
   return (
     <div className="flex min-h-screen flex-col bg-white">Mansur
@@ -47,26 +48,26 @@ export default function Home() {
                 <Button>Manage Boards</Button>
               </div>
               <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border-gray-200 shadow-xl">
-                <Image
+                {activeTab=== "organize" &&<Image
                   src="/hero-images/hero1.png"
                   alt="Organize Applications"
                   width={1200}
                   height={800}
-                />
+                />}
 
-                <Image
+                {activeTab === "hired" && <Image
                   src="/hero-images/hero2.png"
                   alt="Get Heried"
                   width={1200}
                   height={800}
-                />
+                />}
 
-                <Image
+                {activeTab === "board" &&<Image
                   src="/hero-images/hero3.png"
                   alt="Manage board"
                   width={1200}
                   height={800}
-                />
+                />}
               </div>
             </div>
           </div>
