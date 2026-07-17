@@ -1,4 +1,4 @@
-
+'use client'
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react"
 import Link from "next/link";
@@ -8,6 +8,9 @@ import Image from "next/image";
 
 
 export default function Home() {
+
+  
+
   return (
     <div className="flex min-h-screen flex-col bg-white">Mansur
       <main className="flex-1">
@@ -33,17 +36,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Hero Images Section */}
+        {/* Hero Images Section Tabs*/}
         <section className="border-t  bg-white py-16">
-          <div>
-            <div>
+          <div className=" container mx-auto px-4">
+            <div className="mx-auto max-w-6xl">
               {/* Tabs */}
-              <div>
+              <div className="flex gap-4 justify-center mb-8">
                 <Button>Organize Application</Button>
                 <Button>Get Hired</Button>
                 <Button>Manage Boards</Button>
               </div>
-              <div>
+              <div className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border-gray-200 shadow-xl">
                 <Image
                   src="/hero-images/hero1.png"
                   alt="Organize Applications"
