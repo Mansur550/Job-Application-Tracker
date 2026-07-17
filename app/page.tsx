@@ -59,8 +59,8 @@ export default function Home() {
                 />
 
                 <Image
-                  src="/hero-images/hero1.png"
-                  alt="Organize Applications"
+                  src="/hero-images/hero3.png"
+                  alt="Manage board"
                   width={1200}
                   height={800}
                 />
