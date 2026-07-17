@@ -8,8 +8,8 @@ export default function Home() {
         <section className="container mx-auto px-4 py-32">
           <div>
             <h1 className="text-black text-2xl">A better way to track you job</h1>
-            <p>
-              
+            <p className="text-gray-700">
+              Capture, organize ang manage your job search in one place
             </p>
           </div>
         </section>
