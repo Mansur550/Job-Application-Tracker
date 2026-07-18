@@ -25,7 +25,7 @@ export default function HeroImage() {
 
                         <Button 
                         onClick={() => setActiveTab("board")}
-                        className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors ${activeTab === "boards" ? "bg-primary text-white" : "bg-gray-200 text-gray-700 hover: bg-gray-200"}`}
+                        className={`rounded-lg px-6 py-3 text-sm font-medium transition-colors ${activeTab === "board" ? "bg-primary text-white" : "bg-gray-200 text-gray-700 hover: bg-gray-200"}`}
                         >
                         Manage Boards</Button>
                     </div>
