@@ -1,6 +1,8 @@
 "use client";
 
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export default function SignUp() {
     return(
@@ -12,6 +14,16 @@ export default function SignUp() {
                     <CardDescription> Create an account to start traking your JOb applications
                     </CardDescription>
                 </CardHeader>
+                <form action="">
+                   <CardContent>
+                    {/* Nme */}
+                    <div>
+                        <Label htmlFor="name">Name</Label>
+                        <Input id= "name" type="text" placeholder="Jhon Doe" required/>
+                    </div>
+
+                    </CardContent> 
+                </form>
                 
             </Card>
 
