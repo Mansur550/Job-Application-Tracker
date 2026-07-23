@@ -5,11 +5,21 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import { useState } from "react";
 
 
 
 
 export default function SignUp() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword]= useState("");
+
+    const [error, setError]= useState("");
+    const [loading, setLoading] = useState("")
+
+
+
     return (
         <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-white p-4">
             <Card className="w-full max-w-md border-gray-400 shadow-xl">
@@ -31,6 +41,8 @@ export default function SignUp() {
                                 id="name"
                                 type="text"
                                 placeholder="Jhon Doe"
+                                value={name}
+                                onChange = {(e)=> setName(e.target.value)}
                                 required
                                  className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
@@ -40,6 +52,8 @@ export default function SignUp() {
                         <div className="mt-4 mb-4">
                             <Label htmlFor="email">Email</Label>
                             <Input id="email" type="email" placeholder="jhondoe@example.com" required
+                            value={email}
+                            onChange = {(e)=> setEmail(e.target.value)}
                             className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
                         </div>
@@ -52,6 +66,8 @@ export default function SignUp() {
                                 id="password"
                                 type="password"
                                 placeholder=""
+                                value={password}
+                                onChange = {(e)=> setPassword(e.target.value)}
                                 required
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
