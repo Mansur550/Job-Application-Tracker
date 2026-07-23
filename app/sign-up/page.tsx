@@ -23,7 +23,7 @@ export default function SignUp() {
                     </CardDescription>
                 </CardHeader>
                 <form className="space-y-4">
-                    <CardContent>
+                <CardContent>
                         {/* Nme */}
                         <div className="mb-4">
                             <Label htmlFor="name" className="text-gray-700">Name</Label>
