@@ -11,12 +11,31 @@ import { useState } from "react";
 
 
 export default function SignUp() {
+    // States
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword]= useState("");
 
     const [error, setError]= useState("");
-    const [loading, setLoading] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    // Submit Function of form
+    async function handleSubmit( e: React.FormEvent){
+        e.preventDefault();
+      setError("") ;
+      setLoading(true);
+
+    //   sign Up
+    try {
+
+    } catch (err) {
+        setError("An unexpected error occured");
+    } finally{
+        setLoading(false);
+    }
+
+    }
+
 
 
 
@@ -32,7 +51,7 @@ export default function SignUp() {
                       Create an account to start traking your JOb applications
                     </CardDescription>
                 </CardHeader>
-                <form className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                 <CardContent>
                         {/* Nme */}
                         <div className="mb-4">
