@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { getSession } from "@/lib/auth/auth";
 import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 
 
 export default async function Navbar() {
@@ -28,7 +29,13 @@ export default async function Navbar() {
                     </Link>
                     <DropdownMenu>
                        <DropdownMenuTrigger>
-                        <Button></Button>
+                        <Button variant="ghost">
+                            <Avatar>
+                                <AvatarFallback className="bg-primary text-white font-bold">
+                                   {session.user.name[0].toUpperCase()} 
+                                </AvatarFallback>
+                            </Avatar>
+                        </Button>
                         </DropdownMenuTrigger> 
                     </DropdownMenu>
                     </>
