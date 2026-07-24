@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
-import {signUp} from '@/lib/auth/auth-client'
+import { signUp } from '@/lib/auth/auth-client'
+import { useRouter } from "next/navigation";
 
 
 
@@ -15,25 +16,36 @@ export default function SignUp() {
     // States
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
-    const [password, setPassword]= useState("");
+    const [password, setPassword] = useState("");
 
-    const [error, setError]= useState("");
+    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     // Submit Function of form
-    async function handleSubmit( e: React.FormEvent){
+    async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-      setError("") ;
-      setLoading(true);
+        setError("");
+        setLoading(true);
 
-    //   sign Up
-    try {
+        //   sign Up
+        try {
+            const result = await signUp.email({
+                name,
+                email,
+                password,
+            });
 
-    } catch (err) {
-        setError("An unexpected error occured");
-    } finally{
-        setLoading(false);
-    }
+            if (result.error) {
+                setError(result.error.message ?? "Faild to sign up")
+            } else {
+                router.push("/dashboard");
+            }
+        } catch (err) {
+            setError("An unexpected error occured");
+        } finally {
+            setLoading(false);
+        }
 
     }
 
@@ -49,11 +61,16 @@ export default function SignUp() {
                     </CardTitle>
 
                     <CardDescription className="text-gray-600">
-                      Create an account to start traking your JOb applications
+                        Create an account to start traking your JOb applications
                     </CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                <CardContent>
+                    <CardContent className="space-y-4">
+                        {error && (
+                            <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
+                                {error}
+                            </div>
+                        )}
                         {/* Nme */}
                         <div className="mb-4">
                             <Label htmlFor="name" className="text-gray-700">Name</Label>
@@ -62,9 +79,9 @@ export default function SignUp() {
                                 type="text"
                                 placeholder="Jhon Doe"
                                 value={name}
-                                onChange = {(e)=> setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                                 required
-                                 className="border-gray-300 focus:border-primary focus:ring-primary"
+                                className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
                         </div>
 
@@ -72,12 +89,12 @@ export default function SignUp() {
                         <div className="mt-4 mb-4">
                             <Label htmlFor="email">Email</Label>
                             <Input id="email" type="email" placeholder="jhondoe@example.com" required
-                            value={email}
-                            onChange = {(e)=> setEmail(e.target.value)}
-                            className="border-gray-300 focus:border-primary focus:ring-primary"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
                         </div>
-                        
+
 
                         {/* Password */}
                         <div className="space-y-2">
@@ -87,7 +104,7 @@ export default function SignUp() {
                                 type="password"
                                 placeholder=""
                                 value={password}
-                                onChange = {(e)=> setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
@@ -96,15 +113,18 @@ export default function SignUp() {
 
                     <CardFooter className="flex flex-col space-y-4">
                         <Button type="submit"
-                        className="w-full bg-primary hover:bg-primary/90"
-                        >Sign-up</Button>
+                            className="w-full bg-primary hover:bg-primary/90"
+                            disabled={loading}
+                        >
+                            {loading ? "Creating account..." : "Sign Up"}
+                        </Button>
                         <p>
                             Already have an account? {" "}
                             <Link href="/sign-in"
-                            className="font-medium text-primary hover:underline"
+                                className="font-medium text-primary hover:underline"
                             >Sign In</Link>
                         </p>
-                        
+
                     </CardFooter>
                 </form>
 

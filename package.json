@@ -15,7 +15,6 @@
     "clsx": "^2.1.1",
     "lucide-react": "^1.25.0",
     "mongodb": "^7.5.0",
-    "mongoos": "^0.0.1-security",
     "mongoose": "^9.7.4",
     "next": "16.2.10",
     "react": "19.2.4",
