@@ -7,3 +7,11 @@ export interface IBoard extends Document {
     createdAt: Date;
     updatedAt: Date;
 }
+
+const BoardSchema = new Schema<IBoard>({
+    name: {
+        type: String,
+        required: true,
+    },
+    
+})
