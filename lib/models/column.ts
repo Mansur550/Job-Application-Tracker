@@ -1,35 +1,44 @@
 import mongoose, { Schema, Document } from "mongoose";
 
-export interface IBoard extends Document {
-    name: string;
-    userId: string;
-    columns: mongoose.Types.ObjectId[];
-    createdAt: Date;
-    updatedAt: Date;
+export interface IColumn extends Document {
+  name: string;
+  boardId: mongoose.Types.ObjectId;
+  order: number;
+  jobApplications: mongoose.Types.ObjectId[];
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const BoardSchema = new Schema<IBoard>({
+// Board -> Columns -> JobApplications
+
+const ColumnSchema = new Schema<IColumn>(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    userId: {
-        type: String,
-        required: true,
-        index: true,
+    boardId: {
+      type: Schema.Types.ObjectId,
+      ref: "Board",
+      required: true,
+      index: true,
     },
-    columns: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Column",
-        },
-    ]
+    order: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    jobApplications: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "JobApplication",
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
-},
-    {
-        timestamps: true,
-});
-
-export default mongoose.models.Board ||
-mongoose.model<IBoard>("Board", BoardSchema);
-
+export default mongoose.models.Column ||
+  mongoose.model<IColumn>("Column", ColumnSchema);
