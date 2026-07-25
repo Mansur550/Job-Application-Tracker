@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import clientPromise from "@/lib/mongodb";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 const client = await clientPromise;
 
@@ -18,4 +19,13 @@ export async function getSession() {
         headers: await headers()
     })
     return result;
+}
+
+export async function signOut() {
+    const result = await auth.api.signOut({
+        headers: await headers()
+    })
+    if (result.success){
+        redirect("/")
+    }
 }
