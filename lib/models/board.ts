@@ -13,5 +13,10 @@ const BoardSchema = new Schema<IBoard>({
         type: String,
         required: true,
     },
+    userId: {
+        type: String,
+        required: true,
+        index: true,
+    },
     
 })
