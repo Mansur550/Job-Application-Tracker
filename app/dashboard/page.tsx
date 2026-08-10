@@ -2,6 +2,7 @@ import { getSession } from "@/lib/auth/auth"
 import connectDB from "@/lib/db"
 import { Board } from "@/lib/models"
 import { redirect } from "next/navigation"
+import KanbanBoard from "@/components/ui/kanban-board"
 
 
 
@@ -29,7 +30,7 @@ export default async function Dashbord() {
                     </h1>
                     <p className="text-gray-600 ">Track your job application</p>
                 </div>
-                {/* // <KabanBoard/> */}
+                <KanbanBoard />
             </div>
         </div>
     )
