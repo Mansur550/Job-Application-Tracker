@@ -19,7 +19,7 @@ export default async function Dashbord() {
         name: "Job Hunt",
     })
 
-    console.log(board)
+    
 
     return (
         <div className="min-h-screen bg-white border-black border-2">
@@ -30,7 +30,7 @@ export default async function Dashbord() {
                     </h1>
                     <p className="text-gray-600 ">Track your job application</p>
                 </div>
-                <KanbanBoard board={undefined} />
+                <KanbanBoard board={JSON.parse(JSON.stringify(board))}  userId= {session.user.id}/>
             </div>
         </div>
     )
