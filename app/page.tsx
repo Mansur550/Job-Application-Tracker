@@ -43,7 +43,7 @@ export default function Home() {
           <div className="container mx-auto px-20">
             <div className="grid gap-12 md:grid-cols-3 ">
               <div className="flex flex-col items-center justify-center">
-                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 ">
                   <Briefcase className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="mb-3 text-2xl font-semibold text-black">

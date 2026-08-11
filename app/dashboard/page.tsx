@@ -30,7 +30,7 @@ export default async function Dashbord() {
                     </h1>
                     <p className="text-gray-600 ">Track your job application</p>
                 </div>
-                <KanbanBoard />
+                <KanbanBoard board={undefined} />
             </div>
         </div>
     )
