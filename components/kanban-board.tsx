@@ -2,9 +2,10 @@
 
 import { Board, Column } from "@/lib/models/models.types";
 import { Award, Calendar, CheckCircle2, Mic, MoreHorizontal, MoreVertical, Trash2, XCircle } from "lucide-react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "./dropdown-menu";
-import { Button } from "./button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuContent } from "./ui/dropdown-menu";
+import { Button } from "./ui/button";
+import CreateJobApplicationDialog from "./crate-job-dialog";
 
 
 
@@ -65,14 +66,14 @@ function DroppableColumn({
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost"
-                        size="icon"
-                        className="h-6 w-6 text-white hover:bg-white/20">
-                            <MoreVertical className="h-4 w-4"/>
+                            size="icon"
+                            className="h-6 w-6 text-white hover:bg-white/20">
+                            <MoreVertical className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuItem className="text-destructive">
-                            <Trash2 className="mr-2 h-4 w-4"  />
+                            <Trash2 className="mr-2 h-4 w-4" />
                             Delete Column
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -80,7 +81,11 @@ function DroppableColumn({
             </div>
         </CardHeader>
 
-        
+        <CardContent className="Space-y-2 pt-4 bg-gray-50 min-h-[400px] rounded-b-lg">
+
+            <CreateJobApplicationDialog columnId={column._id} boardId={boardId}/>
+        </CardContent>
+
     </Card>
 }
 

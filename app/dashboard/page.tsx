@@ -2,7 +2,7 @@ import { getSession } from "@/lib/auth/auth"
 import connectDB from "@/lib/db"
 import { Board } from "@/lib/models"
 import { redirect } from "next/navigation"
-import KanbanBoard from "@/components/ui/kanban-board"
+import KanbanBoard from "@/components/kanban-board"
 
 
 
@@ -24,8 +24,8 @@ export default async function Dashbord() {
 
 
     return (
-        <div className="min-h-screen bg-white border-black border-2">
-            <div className="cantainer mx-auto p-6 border-red-600 border-2">
+        <div className="min-h-screen bg-white">
+            <div className="cantainer mx-auto p-6 ">
                 <div className="mb-6">
                     <h1 className="text-3xl font-bold text-black">
                         Job Hunt
