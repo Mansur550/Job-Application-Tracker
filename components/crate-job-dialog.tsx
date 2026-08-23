@@ -1,9 +1,12 @@
+"use client";
+
 import { Plus } from "lucide-react";
 import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
+import { useState } from "react";
 
 interface CreateJobApplicationDialogProps {
     columnId: string;
@@ -14,8 +17,21 @@ export default function CreateJobApplicationDialog({
     columnId,
     boardId,
 }: CreateJobApplicationDialogProps) {
+
+    // States
+    const [open, setOpen] = useState<boolean>(false);
+    const [formData, setFormData] = useState({
+        company: "",
+        position: "",
+        location: "",
+        notes: "",
+        salary: "",
+        jobUrl: "",
+        tags: "",
+        description: "",
+    });
     return <>
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
                 <Button variant="outline"
                     className="w-full mb-4 justify-start text-muted-foreground border-dashed border-2 hover:border-solid hover:bg-muted/50"
@@ -35,7 +51,11 @@ export default function CreateJobApplicationDialog({
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="company">Compaany *</Label>
-                                <Input id="company" required />
+                                <Input id="company"
+                                    required
+                                    value={formData.company}
+                                    onChange={(e) =>setFormData({ ...formData, company: e.target.value })}
+                                    />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="position">Position *</Label>
@@ -78,11 +98,11 @@ export default function CreateJobApplicationDialog({
                             <Textarea
                                 id="description"
                                 rows={3}
-                                    placeholder="Brief description of the role..."
-                                // value={formData.description}
-                                // onChange={(e) =>
-                                // setFormData({ ...formData, description: e.target.value })
-                                // }
+                                placeholder="Brief description of the role..."
+                            // value={formData.description}
+                            // onChange={(e) =>
+                            // setFormData({ ...formData, description: e.target.value })
+                            // }
                             />
                         </div>
 
@@ -91,10 +111,10 @@ export default function CreateJobApplicationDialog({
                             <Textarea
                                 id="notes"
                                 rows={4}
-                                // value={formData.notes}
-                                // onChange={(e) =>
-                                //     setFormData({ ...formData, notes: e.target.value })
-                                // }
+                            // value={formData.notes}
+                            // onChange={(e) =>
+                            //     setFormData({ ...formData, notes: e.target.value })
+                            // }
                             />
                         </div>
 
@@ -103,7 +123,11 @@ export default function CreateJobApplicationDialog({
 
 
                     <DialogFooter>
-                        <Button type="button" variant="outline">Cancel</Button>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setOpen(false)}
+                        >Cancel</Button>
                         <Button type="submit">Add Application</Button>
                     </DialogFooter>
                 </form>
