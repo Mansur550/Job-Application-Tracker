@@ -2,6 +2,7 @@
 
 import { getSession } from "../auth/auth";
 import connectDB from "../db";
+import { Board } from "../models";
 
 interface JobApplicationData {
     company: string;
@@ -42,6 +43,14 @@ export async function createJobApplication(data: JobApplicationData) {
         return {error: "Missing required fields"}
     }
 
-    //
+    //Verify board ownership
+    const board = await Board.findOne({
+        _id: boardId,
+        userId: session.user.id,
+    })
+    if(!board){
+        return {error: "Board not found or unauthorized"}
+    }
+    
     
 }
