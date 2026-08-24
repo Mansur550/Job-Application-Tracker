@@ -30,6 +30,20 @@ export default function CreateJobApplicationDialog({
         tags: "",
         description: "",
     });
+
+    async function handleSubmit(e: React.FormEvent
+        
+    ) {
+    e.preventDefault();
+
+    try{
+
+    }catch(err){
+        console.error(err);
+    }
+    }
+
+
     return <>
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger>
@@ -46,7 +60,7 @@ export default function CreateJobApplicationDialog({
                     <DialogDescription>Track a new job application
                     </DialogDescription>
                 </DialogHeader>
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                     <div className="space-y-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
@@ -54,22 +68,36 @@ export default function CreateJobApplicationDialog({
                                 <Input id="company"
                                     required
                                     value={formData.company}
-                                    onChange={(e) =>setFormData({ ...formData, company: e.target.value })}
+                                    onChange={(e) =>
+                                        setFormData({ ...formData, company: e.target.value })}
                                     />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="position">Position *</Label>
-                                <Input id="position" required />
+                                <Input id="position"
+                                 required
+                                 value={formData.position}
+                                    onChange={(e) =>
+                                        setFormData({ ...formData, position: e.target.value })}
+                                 />
                             </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <Label htmlFor="location">Location</Label>
-                                <Input id="location" />
+                                <Input id="location" 
+                                value={formData.location}
+                                onChange={(e) =>
+                                    setFormData({ ...formData, location: e.target.value })}
+                                />
                             </div>
                             <div className="space-y-2">
                                 <Label htmlFor="salary">Salary</Label>
-                                <Input id="salary" />
+                                <Input id="salary" 
+                                value={formData.salary}
+                                onChange={(e) =>
+                                    setFormData({ ...formData, salary: e.target.value })}
+                                />
                             </div>
                         </div>
                         <div className="space-y-2">
@@ -78,7 +106,9 @@ export default function CreateJobApplicationDialog({
                                 id="jobUrl"
                                 type="url"
                                 placeholder="https://..."
-
+                                value={formData.jobUrl}
+                                    onChange={(e) =>
+                                        setFormData({ ...formData, jobUrl: e.target.value })}
 
                             />
                         </div>
@@ -87,10 +117,10 @@ export default function CreateJobApplicationDialog({
                             <Input
                                 id="tags"
                                 placeholder="React, Tailwind, High Pay"
-                            // value={formData.tags}
-                            // onChange={(e) =>
-                            //     setFormData({ ...formData, tags: e.target.value })
-                            // }
+                            value={formData.tags}
+                            onChange={(e) =>
+                                setFormData({ ...formData, tags: e.target.value })
+                            }
                             />
                         </div>
                         <div className="space-y-2">
@@ -99,10 +129,10 @@ export default function CreateJobApplicationDialog({
                                 id="description"
                                 rows={3}
                                 placeholder="Brief description of the role..."
-                            // value={formData.description}
-                            // onChange={(e) =>
-                            // setFormData({ ...formData, description: e.target.value })
-                            // }
+                            value={formData.description}
+                            onChange={(e) =>
+                            setFormData({ ...formData, description: e.target.value })
+                            }
                             />
                         </div>
 
@@ -111,10 +141,10 @@ export default function CreateJobApplicationDialog({
                             <Textarea
                                 id="notes"
                                 rows={4}
-                            // value={formData.notes}
-                            // onChange={(e) =>
-                            //     setFormData({ ...formData, notes: e.target.value })
-                            // }
+                            value={formData.notes}
+                            onChange={(e) =>
+                                setFormData({ ...formData, notes: e.target.value })
+                            }
                             />
                         </div>
 
