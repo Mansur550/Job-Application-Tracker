@@ -81,7 +81,7 @@ function DroppableColumn({
             </div>
         </CardHeader>
 
-        <CardContent className="Space-y-2 pt-4 bg-gray-50 min-h-[400px] rounded-b-lg">
+        <CardContent className="space-y-2 pt-4 bg-gray-50 min-h-[400px] rounded-b-lg">
 
             <CreateJobApplicationDialog columnId={column._id} boardId={boardId}/>
         </CardContent>
@@ -91,6 +91,8 @@ function DroppableColumn({
 
 export default function KanbanBoard({ board, userId }: kanbanBoardProps) {
     const columns = board.columns;
+
+    
     return (
         <>
             <div>
