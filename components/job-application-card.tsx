@@ -1,7 +1,7 @@
 import { Column, JobApplication } from "@/lib/models/models.types";
 import { Card, CardContent } from "./ui/card";
-import { ExternalLink, MoreVertical } from "lucide-react";
-import { DropdownMenu, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { Edit2, ExternalLink, MoreVertical, Trash2 } from "lucide-react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 interface JobApplicationCardProps {
     job: JobApplication;
@@ -45,11 +45,32 @@ export default function JobApplicationCard({ job, columns }: JobApplicationCardP
                                         <MoreVertical />
                                     </Button>
                                 </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                   <DropdownMenuItem>
+                                    <Edit2/>
+                                    Edit
+                                    </DropdownMenuItem>
+                                     {columns.length > 1 &&(
+                                        <>
+                                        {columns.filter((c) => c._id !== job.columnId)
+                                        .map((column, key) => (
+                                            <DropdownMenuItem key={key}>
+                                                Move to {column.name}
+                                            </DropdownMenuItem>
+                                        ))}
+                                        </>
+                                     )}
+
+                                     <DropdownMenuItem>
+                                        <Trash2/>
+                                        Delete
+                                     </DropdownMenuItem>
+                                </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
                     </div>
                 </CardContent>
             </Card>
         </>
-    )
+    );
 }
