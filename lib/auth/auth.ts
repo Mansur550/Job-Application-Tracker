@@ -9,6 +9,13 @@ const client = await clientPromise;
 
 export const auth = betterAuth({
     database: mongodbAdapter(client.db("jobtracker")),
+
+    session: {
+        cookieCache: {
+            enabled: true,
+            maxAge: 60 * 60, 
+        }
+    },
     emailAndPassword: {
         enabled: true,
     },
