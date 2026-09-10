@@ -83,15 +83,15 @@ export default function CreateJobApplicationDialog({
                     </Button>
                 }
             />
-            <DialogContent className="max-w-2xl">
-                <DialogHeader>
+            <DialogContent className="flex max-h-[calc(100dvh-1rem)] max-w-[calc(100%-1rem)] flex-col gap-0 overflow-hidden p-0 sm:max-h-[calc(100dvh-2rem)] sm:max-w-2xl">
+                <DialogHeader className="shrink-0 px-4 pt-4 pr-12 sm:px-6 sm:pt-6 sm:pr-12">
                     <DialogTitle>Add Job Application</DialogTitle>
                     <DialogDescription>Track a new job application
                     </DialogDescription>
                 </DialogHeader>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                    <div className="space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
+                <form className="flex min-h-0 flex-1 flex-col overflow-hidden" onSubmit={handleSubmit}>
+                    <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-4 py-4 sm:px-6">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-2">
                                 <Label htmlFor="company">Compaany *</Label>
                                 <Input id="company"
@@ -111,7 +111,7 @@ export default function CreateJobApplicationDialog({
                                 />
                             </div>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                             <div className="space-y-2">
                                 <Label htmlFor="location">Location</Label>
                                 <Input id="location"
@@ -156,7 +156,7 @@ export default function CreateJobApplicationDialog({
                             <Label htmlFor="description">Description</Label>
                             <Textarea
                                 id="description"
-                                rows={3}
+                                className="h-32 min-h-32 max-h-32 field-sizing-fixed resize-none overflow-y-auto"
                                 placeholder="Brief description of the role..."
                                 value={formData.description}
                                 onChange={(e) =>
@@ -169,7 +169,7 @@ export default function CreateJobApplicationDialog({
                             <Label htmlFor="notes">Notes</Label>
                             <Textarea
                                 id="notes"
-                                rows={4}
+                                className="h-24 min-h-24 max-h-24 field-sizing-fixed resize-none overflow-y-auto"
                                 value={formData.notes}
                                 onChange={(e) =>
                                     setFormData({ ...formData, notes: e.target.value })
@@ -181,13 +181,14 @@ export default function CreateJobApplicationDialog({
                     </div>
 
 
-                    <DialogFooter>
+                    <DialogFooter className="mx-0 mb-0 shrink-0 px-4 py-3 sm:px-6 sm:py-4">
                         <Button
                             type="button"
                             variant="outline"
+                            className="w-full sm:w-auto"
                             onClick={() => setOpen(false)}
                         >Cancel</Button>
-                        <Button type="submit">Add Application</Button>
+                        <Button type="submit" className="w-full sm:w-auto">Add Application</Button>
                     </DialogFooter>
                 </form>
             </DialogContent>
