@@ -8,16 +8,39 @@ import Link from "next/link";
 import { useState } from "react";
 import { signUp } from '@/lib/auth/auth-client'
 import { useRouter } from "next/navigation";
+import { z } from "zod";
 
+const signUpSchema = z.object({
+    name: z
+        .string()
+        .min(1, "Name is required")
+        .min(2, "Name must be at least 2 characters")
+        .regex(/^[A-Za-z\s]+$/, "Enter a valid name"),
+
+    email: z
+        .string()
+        .min(1, "Email is required")
+        .email("Invalid email address"),
+
+    password: z
+        .string()
+        .min(1, "Password is required")
+        .min(8, "Password must be at least 8 characters"),
+});
+
+type SignUpData = z.infer<typeof signUpSchema>;
 
 
 
 export default function SignUp() {
+    const [errorName, setErrorName] = useState("");
+    const [errorEmail, setErrorEmail] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
+
     // States
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false)
     const router = useRouter()
@@ -25,9 +48,26 @@ export default function SignUp() {
     // Submit Function of form
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault();
-        setError("");
-        setLoading(true);
 
+        setError("");
+        setErrorName("");
+        setErrorEmail("");
+        setErrorPassword("");
+
+
+        const result = signUpSchema.safeParse({ name, email, password });
+
+        if (!result.success) {
+            const errors = result.error.format();
+
+            setErrorName(errors.name?._errors.join(". ") ?? "");
+            setErrorEmail(errors.email?._errors.join(". ") ?? "");
+            setErrorPassword(errors.password?._errors.join(". ") ?? "");
+
+            return;
+        }
+
+        setLoading(true);
         //   sign Up
         try {
             const result = await signUp.email({
@@ -73,26 +113,29 @@ export default function SignUp() {
                         )}
                         {/* Nme */}
                         <div className="mb-4">
-                            <Label htmlFor="name" className="text-gray-700">Name</Label>
+                            <Label htmlFor="name" className="text-gray-700 mb-1">Name</Label>
                             <Input
                                 id="name"
                                 type="text"
                                 placeholder="Jhon Doe"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                required
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
+                            {errorName && <p className="mt-1 text-sm text-red-500">{errorName}</p>}
                         </div>
 
                         {/* Email */}
                         <div className="mt-4 mb-4">
-                            <Label htmlFor="email">Email</Label>
-                            <Input id="email" type="email" placeholder="jhondoe@example.com" required
+                            <Label className="text-gray-700 mb-1">Email</Label>
+                            <Input
+                                id="email"
+                                placeholder="jhondoe@example.com"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
+                            {errorEmail && <p className="mt-1 text-sm text-red-500">{errorEmail}</p>}
                         </div>
 
 
@@ -105,9 +148,9 @@ export default function SignUp() {
                                 placeholder=""
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                required
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
+                            {errorPassword && <p className="mt-1 text-sm text-red-500">{errorPassword}</p>}
                         </div>
                     </CardContent>
 

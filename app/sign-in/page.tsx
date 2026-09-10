@@ -15,8 +15,22 @@ import { signIn, signUp } from "@/lib/auth/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { z } from "zod";
+
+
+
+const signInSchema = z.object({
+    email: z.string().trim().email("Please enter a valid email address"),
+    password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
 
 export default function SignIn() {
+    const [fieldErrors, setFieldErrors] = useState<{
+        email?: string;
+        password?: string;
+    }>({});
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -29,7 +43,22 @@ export default function SignIn() {
         e.preventDefault();
 
         setError("");
+        setFieldErrors({});
+
+        const validatedFields = signInSchema.safeParse({ email, password });
+
+        if (!validatedFields.success) {
+            const errors = validatedFields.error.flatten().fieldErrors;
+
+            setFieldErrors({
+                email: errors.email?.[0],
+                password: errors.password?.[0],
+            });
+
+            return;
+        }
         setLoading(true);
+
 
         try {
             const result = await signIn.email({
@@ -60,7 +89,9 @@ export default function SignIn() {
                         Enter your credentials to access your account
                     </CardDescription>
                 </CardHeader>
-                <form onSubmit={handleSubmit} className="space-y-4">
+
+
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
                     <CardContent className="space-y-4">
                         {error && (
                             <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">
@@ -77,9 +108,11 @@ export default function SignIn() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="you@example.com"
-                                required
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
+                            {fieldErrors.email && (
+                                <p className="text-sm text-destructive">{fieldErrors.email}</p>
+                            )}
                         </div>
                         <div className="space-y-2">
                             <Label htmlFor="password" className="text-gray-700">
@@ -88,12 +121,15 @@ export default function SignIn() {
                             <Input
                                 id="password"
                                 type="password"
-                                required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 minLength={8}
                                 className="border-gray-300 focus:border-primary focus:ring-primary"
                             />
+                            {fieldErrors.password && (
+                                <p className="text-sm text-destructive">{fieldErrors.password}</p>
+                            )}
+
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-col space-y-4">
